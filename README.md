@@ -16,7 +16,7 @@ Website that allows users to make rankings of their favorite movies and shows.
 - Liking and disliking rankings
 - Searching other users profiles and rankings
 
-**Stack:**
+**Tech stack:**
 - `Spring Boot`
 - `Maven`
 - `Spring Security`
@@ -29,5 +29,5 @@ Website that allows users to make rankings of their favorite movies and shows.
 
 **ERD model:**
 
-![database-erd](database-erd.png)
+![database-erd](docs/erd_diagram.png)
 
