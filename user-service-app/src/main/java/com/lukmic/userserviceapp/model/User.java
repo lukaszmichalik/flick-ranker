@@ -1,10 +1,10 @@
 package com.lukmic.userserviceapp.model;
 
-import com.lukmic.userserviceapp.DTO.UserRequest;
+import com.lukmic.userserviceapp.dto.request.UserRequest;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
+import java.sql.Date;
 
 @Data
 @Getter
