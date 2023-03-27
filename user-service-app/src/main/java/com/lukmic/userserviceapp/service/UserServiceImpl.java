@@ -1,6 +1,7 @@
 package com.lukmic.userserviceapp.service;
 
 import com.lukmic.userserviceapp.dto.request.UserRequest;
+import com.lukmic.userserviceapp.dto.response.MessageResponse;
 import com.lukmic.userserviceapp.dto.response.UserResponse;
 import com.lukmic.userserviceapp.model.User;
 import com.lukmic.userserviceapp.repository.UserRepository;
@@ -17,10 +18,10 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Override
-    public ResponseEntity<?> createUser(UserRequest userRequest) {
+    public ResponseEntity<MessageResponse> createUser(UserRequest userRequest) {
         userRepository.save(new User(userRequest));
 
-        return ResponseEntity.ok("Saved User");
+        return ResponseEntity.ok(new MessageResponse("User successfully created!"));
     }
 
     @Override

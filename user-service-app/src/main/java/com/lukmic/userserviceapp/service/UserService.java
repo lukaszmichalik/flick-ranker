@@ -1,9 +1,13 @@
 package com.lukmic.userserviceapp.service;
 
 import com.lukmic.userserviceapp.dto.request.UserRequest;
+import com.lukmic.userserviceapp.dto.response.MessageResponse;
+import com.lukmic.userserviceapp.dto.response.UserResponse;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 public interface UserService {
-    ResponseEntity<?> createUser(UserRequest userRequest);
-    ResponseEntity<?> getAllUsers();
+    ResponseEntity<MessageResponse> createUser(UserRequest userRequest);
+    ResponseEntity<List<UserResponse>> getAllUsers();
 }

@@ -1,10 +1,14 @@
 package com.lukmic.userserviceapp.controller;
 
 import com.lukmic.userserviceapp.dto.request.UserRequest;
+import com.lukmic.userserviceapp.dto.response.MessageResponse;
+import com.lukmic.userserviceapp.dto.response.UserResponse;
 import com.lukmic.userserviceapp.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -14,13 +18,13 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<?> createUser(@RequestBody UserRequest userRequest) {
+    public ResponseEntity<MessageResponse> createUser(@RequestBody UserRequest userRequest) {
 
         return userService.createUser(userRequest);
     }
 
     @GetMapping("/all")
-    public ResponseEntity<?> getAllUsers() {
+    public ResponseEntity<List<UserResponse>> getAllUsers() {
 
         return userService.getAllUsers();
     }
