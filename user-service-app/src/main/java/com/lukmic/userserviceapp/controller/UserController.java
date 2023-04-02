@@ -1,5 +1,6 @@
 package com.lukmic.userserviceapp.controller;
 
+import com.lukmic.userserviceapp.dto.request.IdRequest;
 import com.lukmic.userserviceapp.dto.request.UserRequest;
 import com.lukmic.userserviceapp.dto.response.MessageResponse;
 import com.lukmic.userserviceapp.dto.response.UserResponse;
@@ -27,5 +28,11 @@ public class UserController {
     public ResponseEntity<List<UserResponse>> getAllUsers() {
 
         return userService.getAllUsers();
+    }
+
+    @GetMapping("/:id")
+    public ResponseEntity<UserResponse> getUser(@RequestBody IdRequest idRequest) {
+
+        return userService.getUser(idRequest);
     }
 }

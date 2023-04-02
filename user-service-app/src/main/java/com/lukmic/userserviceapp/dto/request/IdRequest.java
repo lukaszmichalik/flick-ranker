@@ -4,14 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Date;
-
 @Getter
 @Setter
-public class UserRequest {
+public class IdRequest {
 
-    private String name;
-    private String username;
-    private Date dob;
-
+    private Long id;
 }

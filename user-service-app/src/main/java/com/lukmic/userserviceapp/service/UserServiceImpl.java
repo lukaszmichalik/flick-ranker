@@ -1,8 +1,10 @@
 package com.lukmic.userserviceapp.service;
 
+import com.lukmic.userserviceapp.dto.request.IdRequest;
 import com.lukmic.userserviceapp.dto.request.UserRequest;
 import com.lukmic.userserviceapp.dto.response.MessageResponse;
 import com.lukmic.userserviceapp.dto.response.UserResponse;
+import com.lukmic.userserviceapp.exception.NotFoundException;
 import com.lukmic.userserviceapp.model.User;
 import com.lukmic.userserviceapp.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -32,5 +34,14 @@ public class UserServiceImpl implements UserService {
                 .toList();
 
         return ResponseEntity.ok(users);
+    }
+
+    @Override
+    public ResponseEntity<UserResponse> getUser(IdRequest idRequest) {
+        User user = userRepository.findById(idRequest.getId())
+                .orElseThrow(() -> new NotFoundException("User not found with id: " + idRequest.getId()));
+
+
+        return ResponseEntity.ok(new UserResponse(user.getName(),user.getUsername(),user.getDob()));
     }
 }
