@@ -2,12 +2,12 @@ package com.lukmic.userserviceapp.service;
 
 import com.lukmic.userserviceapp.dto.request.IdRequest;
 import com.lukmic.userserviceapp.dto.request.UserRequest;
-import com.lukmic.userserviceapp.dto.response.MessageResponse;
 import com.lukmic.userserviceapp.dto.response.UserResponse;
 import com.lukmic.userserviceapp.exception.NotFoundException;
 import com.lukmic.userserviceapp.model.User;
 import com.lukmic.userserviceapp.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -20,10 +20,12 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Override
-    public ResponseEntity<MessageResponse> createUser(UserRequest userRequest) {
-        userRepository.save(new User(userRequest));
+    public ResponseEntity<Long> createUser(UserRequest userRequest) {
 
-        return ResponseEntity.ok(new MessageResponse("User successfully created!"));
+        User user = new User(userRequest);
+        userRepository.save(user);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(user.getId());
     }
 
     @Override

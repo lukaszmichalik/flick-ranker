@@ -2,7 +2,6 @@ package com.lukmic.userserviceapp.controller;
 
 import com.lukmic.userserviceapp.dto.request.IdRequest;
 import com.lukmic.userserviceapp.dto.request.UserRequest;
-import com.lukmic.userserviceapp.dto.response.MessageResponse;
 import com.lukmic.userserviceapp.dto.response.UserResponse;
 import com.lukmic.userserviceapp.service.UserService;
 import lombok.AllArgsConstructor;
@@ -19,7 +18,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<MessageResponse> createUser(@RequestBody UserRequest userRequest) {
+    public ResponseEntity<Long> createUser(@RequestBody UserRequest userRequest) {
 
         return userService.createUser(userRequest);
     }
