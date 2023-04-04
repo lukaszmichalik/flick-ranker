@@ -3,6 +3,7 @@ package com.lukmic.userapp.service;
 import com.lukmic.userapp.dto.request.IdRequest;
 import com.lukmic.userapp.dto.request.UserRequest;
 import com.lukmic.userapp.dto.response.UserResponse;
+import com.lukmic.userapp.exception.ConflictException;
 import com.lukmic.userapp.exception.NotFoundException;
 import com.lukmic.userapp.model.User;
 import com.lukmic.userapp.repository.UserRepository;
@@ -22,10 +23,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseEntity<Long> createUser(UserRequest userRequest) {
 
-        User user = new User(userRequest);
-        userRepository.save(user);
+        if (isEmailAndUsernameUnique(userRequest.getEmail(),userRequest.getUsername())) {
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(user.getId());
+            User user = new User(userRequest);
+            userRepository.save(user);
+
+            return ResponseEntity.status(HttpStatus.CREATED).body(user.getId());
+
+        } else throw new ConflictException("Not unique data provided");
     }
 
     @Override
@@ -45,5 +50,9 @@ public class UserServiceImpl implements UserService {
 
 
         return ResponseEntity.ok(new UserResponse(user));
+    }
+
+    private Boolean isEmailAndUsernameUnique(String email, String username) {
+        return !(userRepository.existsByEmail(email) | userRepository.existsByUsername(username));
     }
 }
