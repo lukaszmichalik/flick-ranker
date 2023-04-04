@@ -1,9 +1,9 @@
-package com.lukmic.userserviceapp.controller;
+package com.lukmic.userapp.controller;
 
-import com.lukmic.userserviceapp.dto.request.IdRequest;
-import com.lukmic.userserviceapp.dto.request.UserRequest;
-import com.lukmic.userserviceapp.dto.response.UserResponse;
-import com.lukmic.userserviceapp.service.UserService;
+import com.lukmic.userapp.dto.request.IdRequest;
+import com.lukmic.userapp.dto.request.UserRequest;
+import com.lukmic.userapp.dto.response.UserResponse;
+import com.lukmic.userapp.service.UserService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;

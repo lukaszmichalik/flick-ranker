@@ -1,8 +1,8 @@
-package com.lukmic.userserviceapp.service;
+package com.lukmic.userapp.service;
 
-import com.lukmic.userserviceapp.dto.request.IdRequest;
-import com.lukmic.userserviceapp.dto.request.UserRequest;
-import com.lukmic.userserviceapp.dto.response.UserResponse;
+import com.lukmic.userapp.dto.request.IdRequest;
+import com.lukmic.userapp.dto.request.UserRequest;
+import com.lukmic.userapp.dto.response.UserResponse;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;

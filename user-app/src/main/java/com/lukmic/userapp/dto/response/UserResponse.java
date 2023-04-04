@@ -1,6 +1,6 @@
-package com.lukmic.userserviceapp.dto.response;
+package com.lukmic.userapp.dto.response;
 
-import com.lukmic.userserviceapp.model.User;
+import com.lukmic.userapp.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

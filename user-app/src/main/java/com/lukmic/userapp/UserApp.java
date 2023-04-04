@@ -1,13 +1,13 @@
-package com.lukmic.userserviceapp;
+package com.lukmic.userapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class UserServiceApp {
+public class UserApp {
 
     public static void main(String[] args) {
-        SpringApplication.run(UserServiceApp.class, args);
+        SpringApplication.run(UserApp.class, args);
     }
 
 }

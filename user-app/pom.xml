@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>com.lukmic.userserviceapp</groupId>
-    <artifactId>user-service-app</artifactId>
+    <artifactId>user-app</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

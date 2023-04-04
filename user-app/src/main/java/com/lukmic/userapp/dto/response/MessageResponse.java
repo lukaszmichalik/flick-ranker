@@ -1,4 +1,4 @@
-package com.lukmic.userserviceapp.dto.response;
+package com.lukmic.userapp.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,11 +1,11 @@
-package com.lukmic.userserviceapp.service;
+package com.lukmic.userapp.service;
 
-import com.lukmic.userserviceapp.dto.request.IdRequest;
-import com.lukmic.userserviceapp.dto.request.UserRequest;
-import com.lukmic.userserviceapp.dto.response.UserResponse;
-import com.lukmic.userserviceapp.exception.NotFoundException;
-import com.lukmic.userserviceapp.model.User;
-import com.lukmic.userserviceapp.repository.UserRepository;
+import com.lukmic.userapp.dto.request.IdRequest;
+import com.lukmic.userapp.dto.request.UserRequest;
+import com.lukmic.userapp.dto.response.UserResponse;
+import com.lukmic.userapp.exception.NotFoundException;
+import com.lukmic.userapp.model.User;
+import com.lukmic.userapp.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

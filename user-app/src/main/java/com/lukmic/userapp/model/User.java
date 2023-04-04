@@ -1,6 +1,6 @@
-package com.lukmic.userserviceapp.model;
+package com.lukmic.userapp.model;
 
-import com.lukmic.userserviceapp.dto.request.UserRequest;
+import com.lukmic.userapp.dto.request.UserRequest;
 import jakarta.persistence.*;
 import lombok.*;
 

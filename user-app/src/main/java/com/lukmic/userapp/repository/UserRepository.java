@@ -1,6 +1,6 @@
-package com.lukmic.userserviceapp.repository;
+package com.lukmic.userapp.repository;
 
-import com.lukmic.userserviceapp.model.User;
+import com.lukmic.userapp.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
