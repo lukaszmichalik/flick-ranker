@@ -4,6 +4,7 @@ import com.lukmic.userserviceapp.dto.request.IdRequest;
 import com.lukmic.userserviceapp.dto.request.UserRequest;
 import com.lukmic.userserviceapp.dto.response.UserResponse;
 import com.lukmic.userserviceapp.service.UserService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<Long> createUser(@RequestBody UserRequest userRequest) {
+    public ResponseEntity<Long> createUser(@Valid @RequestBody UserRequest userRequest) {
 
         return userService.createUser(userRequest);
     }
@@ -30,7 +31,7 @@ public class UserController {
     }
 
     @GetMapping("/:id")
-    public ResponseEntity<UserResponse> getUser(@RequestBody IdRequest idRequest) {
+    public ResponseEntity<UserResponse> getUser(@Valid @RequestBody IdRequest idRequest) {
 
         return userService.getUser(idRequest);
     }

@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
     public ResponseEntity<List<UserResponse>> getAllUsers() {
 
         List<UserResponse> users = userRepository.findAll().stream()
-                .map(user -> new UserResponse(user.getName(), user.getUsername(), user.getDob()))
+                .map(UserResponse::new)
                 .toList();
 
         return ResponseEntity.ok(users);
@@ -44,6 +44,6 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new NotFoundException("User not found with id: " + idRequest.getId()));
 
 
-        return ResponseEntity.ok(new UserResponse(user.getName(),user.getUsername(),user.getDob()));
+        return ResponseEntity.ok(new UserResponse(user));
     }
 }

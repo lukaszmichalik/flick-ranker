@@ -31,7 +31,7 @@
                     <schemas>
                         <schema>public</schema>
                     </schemas>
-                    <url>jdbc:postgresql://localhost:5432/flick-ranker-db</url>
+                    <url>jdbc:postgresql://localhost:5432/flick_ranker_db</url>
                     <locations>
                         <location>filesystem:src/main/resources/db/migration</location>
                     </locations>

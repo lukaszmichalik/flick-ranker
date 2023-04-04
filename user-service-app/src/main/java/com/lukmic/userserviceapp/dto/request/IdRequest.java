@@ -1,6 +1,6 @@
 package com.lukmic.userserviceapp.dto.request;
 
-import lombok.AllArgsConstructor;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,5 +8,6 @@ import lombok.Setter;
 @Setter
 public class IdRequest {
 
+    @NotNull
     private Long id;
 }
