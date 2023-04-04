@@ -2,7 +2,7 @@
 
 Website that allows users to make rankings of their favorite movies and shows. 
 
-**Functionalities:**
+**Functionalities**
 
 - Sign in & sign up 
 - Browsing sets of movies and tv shows (data provided from external movie API) 
@@ -16,7 +16,7 @@ Website that allows users to make rankings of their favorite movies and shows.
 - Liking and disliking rankings
 - Searching other users profiles and rankings
 
-**Tech stack:**
+**Tech stack**
 - `Spring Boot`
 - `Maven`
 - `Spring Security`
@@ -27,7 +27,10 @@ Website that allows users to make rankings of their favorite movies and shows.
 - `Flyway`
 - `Docker`
 
-**ERD model:**
+**Conceptual ER diagram**
 
 ![database-erd](docs/erd_diagram.png)
 
+**Retrieving ranking data - example of microservices workflow**
+
+![retrieving-ranking-diagram](docs/retrieving-ranking-diagram.png)
