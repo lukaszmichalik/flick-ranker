@@ -6,7 +6,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.0.4</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/> <!-- lookup parent from com.lukmic.placementsapp.repository -->
 	</parent>
 	<groupId>com.lukmic</groupId>
 	<artifactId>flick-ranker</artifactId>
@@ -17,6 +17,7 @@
 	<modules>
 		<module>user-app</module>
         <module>ranking-app</module>
+		<module>placements-app</module>
 	</modules>
 	<properties>
 		<java.version>17</java.version>
