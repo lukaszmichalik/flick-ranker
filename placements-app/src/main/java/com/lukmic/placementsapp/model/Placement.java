@@ -3,10 +3,12 @@ package com.lukmic.placementsapp.model;
 import com.lukmic.placementsapp.dto.request.PlacementRequest;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(schema = "placements_db",	name = "placements")
+@NoArgsConstructor
 public class Placement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,14 +1,15 @@
 package com.lukmic.placementsapp.controller;
 
 import com.lukmic.placementsapp.dto.request.PlacementRequest;
+import com.lukmic.placementsapp.model.Placement;
 import com.lukmic.placementsapp.service.PlacementService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Set;
 
 @Controller
 @AllArgsConstructor
@@ -21,5 +22,11 @@ public class PlacementController {
     ResponseEntity<Long> createPlacement(@Valid @RequestBody PlacementRequest placementRequest) {
 
         return placementService.createPlacement(placementRequest);
+    }
+
+    @GetMapping("/ranking-placements/{rankingId}")
+    ResponseEntity<Set<Placement>> getPlacementsByRankingId(@PathVariable Long rankingId) {
+
+        return placementService.getPlacementsByRankingId(rankingId);
     }
 }

@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+
 @Service
 @AllArgsConstructor
 public class PlacementServiceImpl implements PlacementService {
@@ -23,4 +25,11 @@ public class PlacementServiceImpl implements PlacementService {
         return ResponseEntity.status(HttpStatus.CREATED).body(placement.getId());
     }
 
+    @Override
+    public ResponseEntity<Set<Placement>> getPlacementsByRankingId(Long rankingId) {
+
+        Set<Placement> placements = placementRepository.findAllByRankingId(rankingId);
+
+        return ResponseEntity.ok(placements);
+    }
 }
