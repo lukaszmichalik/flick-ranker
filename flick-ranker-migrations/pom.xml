@@ -37,6 +37,7 @@
                         <schema>public</schema>
                         <schema>users_db</schema>
                         <schema>rankings_db</schema>
+                        <schema>placements_db</schema>
                     </schemas>
                     <url>jdbc:postgresql://localhost:5432/flick_ranker_db</url>
                     <locations>

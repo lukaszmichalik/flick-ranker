@@ -4,5 +4,6 @@ CREATE TABLE placements_db.placements (
     ranking_id INTEGER,
     movie_id INTEGER,
     description TEXT,
+    media_type TEXT,
     PRIMARY KEY (id)
 );
