@@ -1,13 +1,13 @@
 package com.lukmic.placementsapp.service;
 
 import com.lukmic.placementsapp.dto.request.PlacementRequest;
-import com.lukmic.placementsapp.model.Placement;
+import com.lukmic.placementsapp.dto.response.PlacementResponse;
 import org.springframework.http.ResponseEntity;
 
-import java.util.Set;
+import java.util.List;
 
 public interface PlacementService {
 
     ResponseEntity<Long> createPlacement(PlacementRequest placementRequest);
-    ResponseEntity<Set<Placement>> getPlacementsByRankingId(Long rankingId);
+    ResponseEntity<List<PlacementResponse>> getPlacementsByRankingId(Long rankingId);
 }

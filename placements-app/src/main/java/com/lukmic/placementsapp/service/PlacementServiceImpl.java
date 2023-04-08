@@ -1,6 +1,7 @@
 package com.lukmic.placementsapp.service;
 
 import com.lukmic.placementsapp.dto.request.PlacementRequest;
+import com.lukmic.placementsapp.dto.response.PlacementResponse;
 import com.lukmic.placementsapp.repository.PlacementRepository;
 import lombok.AllArgsConstructor;
 import com.lukmic.placementsapp.model.Placement;
@@ -8,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -26,9 +27,10 @@ public class PlacementServiceImpl implements PlacementService {
     }
 
     @Override
-    public ResponseEntity<Set<Placement>> getPlacementsByRankingId(Long rankingId) {
+    public ResponseEntity<List<PlacementResponse>> getPlacementsByRankingId(Long rankingId) {
 
-        Set<Placement> placements = placementRepository.findAllByRankingId(rankingId);
+        List<PlacementResponse> placements = placementRepository.findAllByRankingId(rankingId).stream()
+                .map(PlacementResponse::new).toList();
 
         return ResponseEntity.ok(placements);
     }

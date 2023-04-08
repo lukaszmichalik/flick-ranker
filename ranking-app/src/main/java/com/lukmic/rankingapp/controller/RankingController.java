@@ -23,7 +23,7 @@ public class RankingController {
     }
 
     @GetMapping("/{rankingId}")
-    public ResponseEntity<RankingResponse> getRanking (@PathVariable Long rankingId) {
+    public ResponseEntity<RankingResponse> getRanking(@PathVariable Long rankingId) {
         return rankingService.getRanking(rankingId);
     }
 }
