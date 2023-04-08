@@ -1,6 +1,5 @@
 package com.lukmic.rankingapp.controller;
 
-import com.lukmic.rankingapp.dto.request.IdRequest;
 import com.lukmic.rankingapp.dto.request.RankingRequest;
 import com.lukmic.rankingapp.dto.response.RankingResponse;
 import com.lukmic.rankingapp.service.RankingService;
@@ -8,10 +7,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/api/v1/rankings")
@@ -26,8 +22,8 @@ public class RankingController {
         return rankingService.createRanking(rankingRequest);
     }
 
-    @GetMapping("/:id")
-    public ResponseEntity<RankingResponse> getRanking (@Valid @RequestBody IdRequest idRequest) {
-        return rankingService.getRanking(idRequest);
+    @GetMapping("/{rankingId}")
+    public ResponseEntity<RankingResponse> getRanking (@PathVariable Long rankingId) {
+        return rankingService.getRanking(rankingId);
     }
 }

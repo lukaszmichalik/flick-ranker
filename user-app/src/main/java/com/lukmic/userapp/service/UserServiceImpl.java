@@ -1,6 +1,5 @@
 package com.lukmic.userapp.service;
 
-import com.lukmic.userapp.dto.request.IdRequest;
 import com.lukmic.userapp.dto.request.UserRequest;
 import com.lukmic.userapp.dto.response.UserResponse;
 import com.lukmic.userapp.exception.ConflictException;
@@ -44,9 +43,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseEntity<UserResponse> getUser(IdRequest idRequest) {
-        User user = userRepository.findById(idRequest.getId())
-                .orElseThrow(() -> new NotFoundException("User not found with id: " + idRequest.getId()));
+    public ResponseEntity<UserResponse> getUser(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("User not found with id: " + id));
 
 
         return ResponseEntity.ok(new UserResponse(user));

@@ -1,6 +1,5 @@
 package com.lukmic.rankingapp.service;
 
-import com.lukmic.rankingapp.dto.request.IdRequest;
 import com.lukmic.rankingapp.dto.request.RankingRequest;
 import com.lukmic.rankingapp.dto.response.RankingResponse;
 import com.lukmic.rankingapp.exception.NotFoundException;
@@ -27,9 +26,9 @@ public class RankingServiceImpl implements RankingService {
     }
 
     @Override
-    public ResponseEntity<RankingResponse> getRanking(IdRequest idRequest) {
+    public ResponseEntity<RankingResponse> getRanking(Long rankingId) {
 
-        Ranking ranking = rankingRepository.findById(idRequest.getId())
+        Ranking ranking = rankingRepository.findById(rankingId)
                 .orElseThrow(()-> new NotFoundException("Not found"));
 
         return ResponseEntity.ok(new RankingResponse(ranking));
