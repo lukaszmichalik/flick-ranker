@@ -1,9 +1,11 @@
 package com.lukmic.rankingapp.service;
 
+import com.lukmic.rankingapp.configuration.TheMovieDBConfigProperties;
 import com.lukmic.rankingapp.dto.request.RankingRequest;
 import com.lukmic.rankingapp.dto.response.RankingResponse;
 import com.lukmic.rankingapp.exception.NotFoundException;
 import com.lukmic.rankingapp.dto.response.PlacementResponse;
+import com.lukmic.rankingapp.model.Movie;
 import com.lukmic.rankingapp.model.Ranking;
 import com.lukmic.rankingapp.repository.RankingRepository;
 import lombok.AllArgsConstructor;
@@ -12,12 +14,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Arrays;
+
 @Service
 @AllArgsConstructor
 public class RankingServiceImpl implements RankingService {
 
     private final RankingRepository rankingRepository;
     private final RestTemplate restTemplate;
+    private final TheMovieDBConfigProperties tmdbConfig;
 
     @Override
     public ResponseEntity<Long> createRanking(RankingRequest rankingRequest) {
@@ -41,6 +46,9 @@ public class RankingServiceImpl implements RankingService {
 
         rankingResponse.setPlacements(placements);
 
+        Arrays.stream(placements)
+                .forEach(placement -> placement.setMovie(callGetMovieFromTMDB(placement.getMovieId(), placement.getMediaType())));
+
         return ResponseEntity.ok(rankingResponse);
     }
 
@@ -50,6 +58,15 @@ public class RankingServiceImpl implements RankingService {
                         PlacementResponse[].class);
 
         return responseEntity.getBody();
+    }
 
+    private Movie callGetMovieFromTMDB(Long movieId, String mediaType) {
+
+        ResponseEntity<Movie> responseEntity = restTemplate.getForEntity(tmdbConfig.apiUrl() + "/"
+                        + tmdbConfig.apiVersion() + "/" + mediaType + "/" + movieId + "?api_key=" + tmdbConfig.apiKey(),
+                        Movie.class);
+
+
+        return responseEntity.getBody();
     }
 }

@@ -5,7 +5,6 @@ import com.lukmic.rankingapp.dto.response.RankingResponse;
 import org.springframework.http.ResponseEntity;
 
 public interface RankingService {
-
     ResponseEntity<Long> createRanking(RankingRequest rankingRequest);
     ResponseEntity<RankingResponse> getRanking(Long rankingId);
 }
