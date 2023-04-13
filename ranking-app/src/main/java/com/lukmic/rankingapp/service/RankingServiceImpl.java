@@ -2,6 +2,7 @@ package com.lukmic.rankingapp.service;
 
 import com.lukmic.rankingapp.configuration.TheMovieDBConfigProperties;
 import com.lukmic.rankingapp.dto.request.RankingRequest;
+import com.lukmic.rankingapp.dto.response.CommentResponse;
 import com.lukmic.rankingapp.dto.response.RankingResponse;
 import com.lukmic.rankingapp.exception.NotFoundException;
 import com.lukmic.rankingapp.dto.response.PlacementResponse;
@@ -40,11 +41,15 @@ public class RankingServiceImpl implements RankingService {
                 .orElseThrow(()-> new NotFoundException("Not found"));
 
 //        calling placements-app
-        PlacementResponse[] placements = callGetPlacementsByRankingId(ranking.getId());
+        PlacementResponse[] placements = callGetPlacementsByRankingId(rankingId);
+
+        CommentResponse[] comments = callGetCommentsByRankingId(rankingId);
 
         RankingResponse rankingResponse = new RankingResponse(ranking);
 
         rankingResponse.setPlacements(placements);
+
+        rankingResponse.setComments(comments);
 
         Arrays.stream(placements)
                 .forEach(placement -> placement.setMovie(callGetMovieFromTMDB(placement.getMovieId(), placement.getMediaType())));
@@ -56,6 +61,14 @@ public class RankingServiceImpl implements RankingService {
         ResponseEntity<PlacementResponse[]> responseEntity =
                 restTemplate.getForEntity("http://localhost:8082/api/v1/placements/ranking-placements/"+rankingId,
                         PlacementResponse[].class);
+
+        return responseEntity.getBody();
+    }
+
+    private CommentResponse[] callGetCommentsByRankingId(Long rankingId) {
+        ResponseEntity<CommentResponse[]> responseEntity =
+                restTemplate.getForEntity("http://localhost:8083/api/v1/comments/ranking-comments/"+rankingId,
+                        CommentResponse[].class);
 
         return responseEntity.getBody();
     }

@@ -15,6 +15,7 @@ public class RankingResponse {
     private String description;
     private Long authorId;
     private PlacementResponse[] placements;
+    private CommentResponse[] comments;
 
     public RankingResponse(Ranking ranking) {
         this.title = ranking.getTitle();

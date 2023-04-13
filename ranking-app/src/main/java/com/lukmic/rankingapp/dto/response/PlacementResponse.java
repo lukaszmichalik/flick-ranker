@@ -10,7 +10,6 @@ public class PlacementResponse {
     private Integer standing;
     private Long rankingId;
     private Long movieId;
-
     private Movie movie;
     private String description;
     private String mediaType;
