@@ -7,7 +7,7 @@ import com.lukmic.rankingapp.dto.response.CommentResponse;
 import com.lukmic.rankingapp.dto.response.RankingResponse;
 import com.lukmic.rankingapp.exception.NotFoundException;
 import com.lukmic.rankingapp.dto.response.PlacementResponse;
-import com.lukmic.rankingapp.model.Movie;
+import com.lukmic.rankingapp.dto.response.MovieResponse;
 import com.lukmic.rankingapp.model.Ranking;
 import com.lukmic.rankingapp.repository.RankingRepository;
 import lombok.AllArgsConstructor;
@@ -68,11 +68,11 @@ public class RankingServiceImpl implements RankingService {
         return responseEntity.getBody();
     }
 
-    private Movie callGetMovieFromTMDB(Long movieId, String mediaType) {
+    private MovieResponse callGetMovieFromTMDB(Long movieId, String mediaType) {
 
-        ResponseEntity<Movie> responseEntity = restTemplate.getForEntity(tmdbConfig.apiUrl() + "/"
+        ResponseEntity<MovieResponse> responseEntity = restTemplate.getForEntity(tmdbConfig.apiUrl() + "/"
                         + tmdbConfig.apiVersion() + "/" + mediaType + "/" + movieId + "?api_key=" + tmdbConfig.apiKey(),
-                        Movie.class);
+                        MovieResponse.class);
 
         return responseEntity.getBody();
     }

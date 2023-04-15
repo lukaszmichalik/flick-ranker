@@ -1,4 +1,4 @@
-package com.lukmic.rankingapp.model;
+package com.lukmic.rankingapp.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.Getter;
@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Movie {
+public class MovieResponse {
 
     @JsonAlias("name")
     private String title;
