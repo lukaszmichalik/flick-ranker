@@ -1,5 +1,6 @@
 package com.lukmic.rankingapp.service;
 
+import com.lukmic.rankingapp.client.CommentsClient;
 import com.lukmic.rankingapp.configuration.TheMovieDBConfigProperties;
 import com.lukmic.rankingapp.dto.request.RankingRequest;
 import com.lukmic.rankingapp.dto.response.CommentResponse;
@@ -24,6 +25,7 @@ public class RankingServiceImpl implements RankingService {
     private final RankingRepository rankingRepository;
     private final RestTemplate restTemplate;
     private final TheMovieDBConfigProperties tmdbConfig;
+    private final CommentsClient commentsClient;
 
     @Override
     public ResponseEntity<Long> createRanking(RankingRequest rankingRequest) {
@@ -40,15 +42,15 @@ public class RankingServiceImpl implements RankingService {
         Ranking ranking = rankingRepository.findById(rankingId)
                 .orElseThrow(()-> new NotFoundException("Not found"));
 
-//        calling placements-app
-        PlacementResponse[] placements = callGetPlacementsByRankingId(rankingId);
-
-        CommentResponse[] comments = callGetCommentsByRankingId(rankingId);
-
         RankingResponse rankingResponse = new RankingResponse(ranking);
 
+//        calling placements-app using RestTemplate Client
+        PlacementResponse[] placements = callGetPlacementsByRankingId(rankingId);
         rankingResponse.setPlacements(placements);
 
+//        calling comments-app using Feign Client
+        ResponseEntity<CommentResponse[]> responseEntity = commentsClient.getCommentsByRankingId(rankingId);
+        CommentResponse[] comments = responseEntity.getBody();
         rankingResponse.setComments(comments);
 
         Arrays.stream(placements)
@@ -58,17 +60,10 @@ public class RankingServiceImpl implements RankingService {
     }
 
     private PlacementResponse[] callGetPlacementsByRankingId(Long rankingId) {
+
         ResponseEntity<PlacementResponse[]> responseEntity =
                 restTemplate.getForEntity("http://localhost:8082/api/v1/placements/ranking-placements/"+rankingId,
                         PlacementResponse[].class);
-
-        return responseEntity.getBody();
-    }
-
-    private CommentResponse[] callGetCommentsByRankingId(Long rankingId) {
-        ResponseEntity<CommentResponse[]> responseEntity =
-                restTemplate.getForEntity("http://localhost:8083/api/v1/comments/ranking-comments/"+rankingId,
-                        CommentResponse[].class);
 
         return responseEntity.getBody();
     }
@@ -78,7 +73,6 @@ public class RankingServiceImpl implements RankingService {
         ResponseEntity<Movie> responseEntity = restTemplate.getForEntity(tmdbConfig.apiUrl() + "/"
                         + tmdbConfig.apiVersion() + "/" + mediaType + "/" + movieId + "?api_key=" + tmdbConfig.apiKey(),
                         Movie.class);
-
 
         return responseEntity.getBody();
     }
