@@ -9,7 +9,7 @@ import java.sql.Date;
 @Setter
 public class CommentResponse {
     private String content;
-    private Long authorId;
+    private AuthorResponse author;
     private Long rankingId;
     private Date date;
 }

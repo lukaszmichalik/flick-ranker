@@ -1,20 +1,20 @@
 package com.lukmic.rankingapp.service;
 
 import com.lukmic.rankingapp.client.CommentsClient;
+import com.lukmic.rankingapp.client.PlacementClient;
+import com.lukmic.rankingapp.client.TheMovieDBClient;
 import com.lukmic.rankingapp.configuration.TheMovieDBConfigProperties;
 import com.lukmic.rankingapp.dto.request.RankingRequest;
 import com.lukmic.rankingapp.dto.response.CommentResponse;
 import com.lukmic.rankingapp.dto.response.RankingResponse;
 import com.lukmic.rankingapp.exception.NotFoundException;
 import com.lukmic.rankingapp.dto.response.PlacementResponse;
-import com.lukmic.rankingapp.dto.response.MovieResponse;
 import com.lukmic.rankingapp.model.Ranking;
 import com.lukmic.rankingapp.repository.RankingRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 
@@ -23,9 +23,10 @@ import java.util.Arrays;
 public class RankingServiceImpl implements RankingService {
 
     private final RankingRepository rankingRepository;
-    private final RestTemplate restTemplate;
     private final TheMovieDBConfigProperties tmdbConfig;
     private final CommentsClient commentsClient;
+    private final TheMovieDBClient tmdbClient;
+    private final PlacementClient placementClient;
 
     @Override
     public ResponseEntity<Long> createRanking(RankingRequest rankingRequest) {
@@ -44,36 +45,22 @@ public class RankingServiceImpl implements RankingService {
 
         RankingResponse rankingResponse = new RankingResponse(ranking);
 
-//        calling placements-app using RestTemplate Client
-        PlacementResponse[] placements = callGetPlacementsByRankingId(rankingId);
+//        calling placements-app using Feign Client
+        PlacementResponse[] placements = placementClient.getPlacementsByRankingId(rankingId).getBody();
         rankingResponse.setPlacements(placements);
+
+//        calling themoviedb.org using Feign Client
+        if (placements != null) {
+            Arrays.stream(placements).forEach(placement ->
+                    placement.setMovie(tmdbClient.getMovie(placement.getMovieId(),
+                            placement.getMediaType(), tmdbConfig.apiKey()).getBody()));
+        }
 
 //        calling comments-app using Feign Client
         ResponseEntity<CommentResponse[]> responseEntity = commentsClient.getCommentsByRankingId(rankingId);
         CommentResponse[] comments = responseEntity.getBody();
         rankingResponse.setComments(comments);
 
-        Arrays.stream(placements)
-                .forEach(placement -> placement.setMovie(callGetMovieFromTMDB(placement.getMovieId(), placement.getMediaType())));
-
         return ResponseEntity.ok(rankingResponse);
-    }
-
-    private PlacementResponse[] callGetPlacementsByRankingId(Long rankingId) {
-
-        ResponseEntity<PlacementResponse[]> responseEntity =
-                restTemplate.getForEntity("http://localhost:8082/api/v1/placements/ranking-placements/"+rankingId,
-                        PlacementResponse[].class);
-
-        return responseEntity.getBody();
-    }
-
-    private MovieResponse callGetMovieFromTMDB(Long movieId, String mediaType) {
-
-        ResponseEntity<MovieResponse> responseEntity = restTemplate.getForEntity(tmdbConfig.apiUrl() + "/"
-                        + tmdbConfig.apiVersion() + "/" + mediaType + "/" + movieId + "?api_key=" + tmdbConfig.apiKey(),
-                        MovieResponse.class);
-
-        return responseEntity.getBody();
     }
 }

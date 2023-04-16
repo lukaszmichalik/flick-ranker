@@ -44,6 +44,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseEntity<UserResponse> getUser(Long id) {
+
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("User not found with id: " + id));
 
