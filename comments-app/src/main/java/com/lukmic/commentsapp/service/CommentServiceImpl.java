@@ -1,5 +1,6 @@
 package com.lukmic.commentsapp.service;
 
+import com.lukmic.commentsapp.client.UserClient;
 import com.lukmic.commentsapp.dto.request.CommentRequest;
 import com.lukmic.commentsapp.dto.response.CommentResponse;
 import com.lukmic.commentsapp.repository.CommentRepository;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,6 +18,7 @@ import java.util.List;
 public class CommentServiceImpl implements CommentService {
 
     final private CommentRepository commentRepository;
+    final private UserClient userClient;
 
     @Override
     public ResponseEntity<Long> createComment(CommentRequest commentRequest) {
@@ -29,9 +32,16 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public ResponseEntity<List<CommentResponse>> getCommentsByRankingId(Long rankingId) {
 
-        List<CommentResponse> comments = commentRepository.findAllByRankingId(rankingId).stream()
-                .map(CommentResponse::new).toList();
+        List<Comment> comments = commentRepository.findAllByRankingId(rankingId).stream().toList();
+        List<CommentResponse> commentsResponse = new ArrayList<>();
 
-        return ResponseEntity.ok(comments);
+        comments.forEach(comment -> {
+            CommentResponse commentResponse = new CommentResponse(comment);
+            commentResponse.setAuthor(userClient.getUser(comment.getAuthorId()).getBody());
+
+            commentsResponse.add(commentResponse);
+        });
+
+        return ResponseEntity.ok(commentsResponse);
     }
 }
