@@ -1,36 +1,36 @@
 # flick-ranker
 
-Website that allows users to make rankings of their favorite movies and shows. 
+Website that allows users to make custom rankings of their favorite movies and shows. 
 
-**Functionalities**
+## Planned Functionalities
 
-- Sign in & sign up 
-- Browsing sets of movies and tv shows (data provided from external movie API) 
-- Rating movies and shows
-- Making custom ranking:  
-    - Giving particular name to the ranking
-    - Optional field for rules/description
-    - Making ranking
-    - Option for public or private ranking
-- Comment section for public rankings
-- Liking and disliking rankings
-- Searching other users profiles and rankings
+- sign in & sign up,
+- browsing sets of movies and tv shows (data provided from `themoviedb.org`),
+- making custom rankings:  
+    - giving particular name to the ranking,
+    - setting the order for the movies picked for ranking,
+    - optional field for rules/description,
+    - making ranking public or private,
+- comment section for public rankings,
+- liking rankings system,
+- searching other users profiles and rankings.
 
-**Tech stack**
-- `Spring Boot`
-- `Maven`
-- `Spring Security`
-- `Spring Data JPA`
-- `Lombok`
-- `Vue.js`
-- `PostgreSQL`
-- `Flyway`
-- `Docker`
+**Tech stack:**
+- `Spring Boot`,
+- `Maven`,
+- `Vue.js`,
+- `Spring Security`,
+- `Spring Data JPA`,
+- `Lombok`,
+- `PostgreSQL`,
+- `Flyway`,
+- `Docker`,
+- `Feign Web Client`.
 
-**Conceptual ER diagram**
+**Conceptual ER diagram:**
 
 ![database-erd](docs/erd_diagram.png)
 
-**Retrieving ranking data - example of microservices workflow**
+**Retrieving ranking info - example of data flow in microservices system:**
 
 ![retrieving-ranking-diagram](docs/retrieving-ranking-diagram.png)
