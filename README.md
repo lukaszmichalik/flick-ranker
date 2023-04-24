@@ -25,7 +25,8 @@ Website that allows users to make custom rankings of their favorite movies and s
 - `PostgreSQL`,
 - `Flyway`,
 - `Docker`,
-- `Feign Web Client`.
+- `Open Feign`,
+- `Eureka`.
 
 **Conceptual ER diagram:**
 

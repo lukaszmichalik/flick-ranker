@@ -32,6 +32,8 @@ public class PlacementServiceImpl implements PlacementService {
         List<PlacementResponse> placements = placementRepository.findAllByRankingId(rankingId).stream()
                 .map(PlacementResponse::new).toList();
 
+        System.out.println(placements);
+
         return ResponseEntity.ok(placements);
     }
 }

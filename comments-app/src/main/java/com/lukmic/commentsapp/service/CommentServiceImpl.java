@@ -42,6 +42,8 @@ public class CommentServiceImpl implements CommentService {
             commentsResponse.add(commentResponse);
         });
 
+        System.out.println(commentsResponse);
+
         return ResponseEntity.ok(commentsResponse);
     }
 }

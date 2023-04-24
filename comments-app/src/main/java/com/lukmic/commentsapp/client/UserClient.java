@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name = "users", url = "http://localhost:8080/api/v1/users")
+@FeignClient(name = "USER-APP", path = "/api/v1/users")
 public interface UserClient {
 
     @GetMapping("/{id}")

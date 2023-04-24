@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name = "placements", url = "http://localhost:8082/api/v1/placements")
+@FeignClient(name = "PLACEMENTS-APP", path = "/api/v1/placements")
 public interface PlacementClient {
 
     @GetMapping("/ranking-placements/{rankingId}")
